@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "type": "module",
-  "main": "index.js",
+  "bin": "./target/main.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
