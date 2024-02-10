@@ -1,14 +1,53 @@
 {
-  "name": "importmaps",
+  "name": "gen-importmaps",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "files": [
+    "src",
+    "target"
+  ],
+  "scripts": {
+    "start": "wireit",
+    "test": "wireit",
+    "build": "wireit"
+  },
+  "wireit": {
+    "start": {
+      "command": "node target/main.js",
+      "dependencies": [
+        "build"
+      ]
+    },
+    "test": {
+      "command": "node --test ./target/**/*.test.js",
+      "files": [
+        "target/**"
+      ],
+      "dependencies": [
+        {
+          "script": "build",
+          "cascade": false
+        }
+      ]
+    },
+    "build": {
+      "command": "tsc --build --pretty",
+      "clean": "if-file-deleted",
+      "files": [
+        "src/**",
+        "tsconfig.json"
+      ],
+      "output": [
+        "target/**",
+        "tsconfig.tsbuildinfo"
+      ]
+    }
+  },
   "devDependencies": {
     "@joist/di": "^3.0.7",
     "@joist/element": "^3.0.7",
